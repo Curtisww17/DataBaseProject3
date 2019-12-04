@@ -26,54 +26,24 @@ public class Project3 {
   * @param schema the mysql schema
   */
     public Project3(String username, String password, String schema) {
-    	try {
+		// Fill in code here to initialize conn so it connects to the database
+		// using the provided parameters
+		try {
 			//Get a properties variable so we can pass the username and password to 
 			// the database.
 			Properties info = new Properties();
-			//Type in your ID number instead of the XXXXXX
-			//String username = "u209505";
-			//String pass = "p209505";
-			//String schema = "schema209505";
 			//set the username and password appropriately
 			info.put( "user", username );
-			info.put( "password", pass );
+			info.put( "password", password );
 			//connect to the database
-			conn = DriverManager.getConnection("jdbc:mysql://COMPDBS300/"+schema, info);
+			conn = DriverManager.getConnection("jdbc:mysql://COMPDBS300/"+ schema, info);
 			//if all goes well, this statement should print
 			System.out.println("Connection successful!");	
-			
-			
-			conn.setAutoCommit(true);
-
-			// create a PreparedStatement Object
-			// Specify the SQL statement to run. 
-			// Values inputted by the program/user are replaced by question marks (?)			
-			PreparedStatement pstmt = conn.prepareStatement(
-			"update account set balance=? where account_no=?");
-			// Replace the first question mark with 200
-			pstmt.setDouble(1, 200.00);
-			//Replace the second question mark with the account number
-			pstmt.setString(2, "121234345610");
-			//Use executeUpdate() to run an update or an insert query. This returns the number of 
-			// rows that were updated/inserted
-			//If we want to run a select query, we can use executeQuery.
-			int rows = pstmt.executeUpdate();
-			//Check if any rows got updated. 
-			if (rows > 0)
-			System.out.println("Update successfull!");
-			pstmt.close();
-
-
-			
-			
-			
-			//close the connection		
-			conn.close();
-        } catch (SQLException ex) {
-        	//if an exception is thrown, display the message so that we know 
-        	// what went wrong.
-            System.out.print(ex.getMessage());
-        }	
+		} catch (SQLException ex) {
+			//if an exception is thrown, display the message so that we know 
+			// what went wrong.
+			System.out.print(ex.getMessage());
+		}	
 	}
     
     /**  This method implements:
